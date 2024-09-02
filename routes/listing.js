@@ -41,6 +41,7 @@ router.post("/",
         
         const newListing  = new Listing(req.body.listing);
         await newListing.save();
+        req.flash("success", "New listing Created!");
         res.redirect("/listings");
   
     // let {title, description, image, price, location} = req.body;
