@@ -10,24 +10,22 @@ router.get("/signup", (req,res) =>{
     res.render("users/signup.ejs");
 });
 
-router.post("/signup", wrapAsync(async(req, res) =>{
-    try{
-    let {username, email, password} = req.body;
-    const newUser =  new User({email, username});
-    const registeredUser = User.register(newUser, password); // this method is for register user in the database
-    req.login(registeredUser, (err)=>{
-        if(err) {
-            return next(err);
-        }
-        req.flash("success","welcome to wanderlust");
-        res.redirect("/listings");
-    })
-   
-    }catch(e){
-        req.flash("error", e.message);      //if any user registered in database want to relogin then this message will be printed
+router.post("/signup", wrapAsync(async(req, res, next) => {
+    try {
+        let { username, email, password } = req.body;
+        const newUser = new User({ email, username });
+        const registeredUser = await User.register(newUser, password); // Await the registration
+        req.login(registeredUser, (err) => {
+            if (err) {
+                return next(err);
+            }
+            req.flash("success", "Welcome to Wanderlust");
+            res.redirect("/listings");
+        });
+    } catch (e) {
+        req.flash("error", e.message); // Error message if registration fails
         res.redirect("/signup");
     }
-    
 }));
 
 router.get("/login", (req,res)=>{
@@ -41,14 +39,12 @@ router.post("/login", saveRedirectUrl, passport.authenticate("local", {failureRe
 
 });
 
-router.get("/logout", (req, res) =>{
-    req.logout((err) =>{
-        if(err){
-           return next(err);
-        }
-        req.flash("success", "you are logged out");
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if (err) { return next(err); }
+        req.flash("success", "You are logged out");
         res.redirect("/listings");
-    })
+    });
 });
 
 module.exports = router;

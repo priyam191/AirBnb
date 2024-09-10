@@ -7,15 +7,16 @@
     <div class="card  col-6 offset-3 show-card  listing-card">
         <img src="<%= listing.image %>" class="card-img-top  show-img" alt="listing_image">
         <div class="card-body">
-            <p class="card-text"><i><%= listing.owner.username %></i></p>
-            <p class="card-text"><br>
-                <%= listing.description %><br>
-                <%= listing.price %><br>
+            <p class="card-text"><i><b><%= listing.owner.username %></b></i>
+        
+                <p class="card-text"><%= listing.description %></p><br>
+                <%= listing.price %>/per night<br>
                 <%= listing.location %><br>
                 <%= listing.country%>
             </p>
         </div>
     </div>
+    <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
     <div class="btns">
         <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit listing</a>
         <br></br>
@@ -23,8 +24,12 @@
             <button class="btn btn-dark offset-5">Delete this listing</button>
         </form>
     </div>
+    <% } %>
     <hr>
-    <div>
+
+    <div class="col-8 offset-3 mb-3">
+        <hr/>
+        <% if(currUser) {%>
         <h4>
             leave a review
         </h4>
@@ -39,13 +44,14 @@
             <!-- <div class="invalid-feedback">Please submit some comments for review</div> -->
             <button class="btn-outline-dark" >Submit</button>
         </form>
+        <% } %>
         <hr>
         <h4>all reviews</h4>
         <div class="row col-5 mb-3">
             <% for(review of listing.reviews){ %>
            <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Jane Doe</h5>
+                    <h5 class="card-title"><%= listing.owner.username  %></h5>
                     <p class="card-text"><%= review.comment %></p>
                     <p class="card-text"><%= review.rating %>stars</p>
                 </div>
