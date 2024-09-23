@@ -1,3 +1,10 @@
+if(process.env.NODE_ENV != "production"){
+    require('dotenv').config();
+}
+
+
+// console.log(process.env.SECRET);
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -42,7 +49,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));       // this step means we are accessing the static files through this which are in the public folder
 
 const sessionOptions = {
-    secret: "mysupersecretcode",
+    secret: proces.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -52,9 +59,9 @@ const sessionOptions = {
     },
 };
 
-app.get("/", (req,res) =>{
-    res.send("i am root");
-});
+// app.get("/", (req,res) =>{
+//     res.send("i am root");
+// });
 
 app.use(session(sessionOptions));
 app.use(flash());

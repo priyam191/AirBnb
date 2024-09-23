@@ -2,7 +2,12 @@
 <h3>Create a New Listing</h3>
 <div class="row">
   <div class="col-8 offset">
-    <form method="POST" action="/listings" noValidate class="needs-validation">
+    <form 
+    method="POST" 
+    action="/listings" 
+    noValidate 
+    class="needs-validation"  
+    enctype="multipart/form-data">
       <div class="mb-3"><label for="title" class="form-label">Title</label>
         <input name="listing[title]" placeholder="enter title" type="text" class="form-control" required></div>
         <div class="valid-feedback">everything is right</div>
@@ -10,10 +15,11 @@
       <br>
       <div class="mb-3"><label for="description" class="form-label">Description</label>
         <textarea name="listing[description]" placeholder="enter description" class="form-control" required></textarea></div>
-      
+      </form>
       <br>
-      <div class="mb-3"><label for="image" class="form-label">Image URL</label>
-        <input name="listing[image]" placeholder="enter image url" type="text" class="form-control" required>
+      <div class="mb-3"><label for="image" class="form-label">Upload img</label>
+        <input name="listing[image]"  type="file" class="form-control" required>
+      </div> 
       
       <br>
       <div class="mb-3">

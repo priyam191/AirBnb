@@ -4,10 +4,10 @@ const User = require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
-const { signup, rendersignupform, renderloginform, login, logout } = require("../controller/users.js");
+const userController = require("../controller/users");
 
 
-router.get("/signup", rendersignupform);
+router.get("/signup", userController.rendersignupform);
 
 router.post("/signup", wrapAsync(userController.signup));
 
