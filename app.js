@@ -49,7 +49,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));       // this step means we are accessing the static files through this which are in the public folder
 
 const sessionOptions = {
-    secret: proces.env.SECRET,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {

@@ -20,17 +20,23 @@ module.exports.showListing = async(req, res, next) =>{
 };
 
 
-module.exports.createListing = async(req,res,next) =>{
-    let url = req.file.path;
-    let filename = req.file.filename;
-    const newListing  = new Listing(req.body.listing);
-    newListing.image = {url, filename};
-    newListing.owner = req.user._id;
-    await newListing.save();
-    req.flash("success", "New listing Created!");
-    res.redirect("/listings");
+module.exports.createListing = async (req, res, next) => {
+    try {
+        console.log("req.body:", req.body); // Log the request body
+        console.log("req.file:", req.file); // Log file information
+        console.log("req.user:", req.user); // Log user info (if applicable)
 
-// let {title, description, image, price, location} = req.body;
+        const newListing = new Listing(req.body.listing);
+        newListing.image = { url: req.file.path, filename: req.file.filename };
+        newListing.owner = req.user._id; // Assuming the user is logged in
+
+        await newListing.save();
+        req.flash("success", "New listing Created!");
+        res.redirect("/listings");
+    } catch (err) {
+        console.log("Error in createListing:", err); // Log any errors
+        next(err); // Pass it to the error-handling middleware
+    }
 };
 
 module.exports.renderEditForm = async(req,res) => {
