@@ -41,6 +41,16 @@ async function main(){
     await mongoose.connect(MONGO_URL);
 }
 
+const initData = require("./init/data.js");
+
+// const initDB = async () => {
+//     await Listing.deleteMany({});       // if there exist any data in database then it clears all the data
+//     initData.data = initData.data.map((obj) =>({...obj, owner: "66f3d0dc47fc4cec6b7b0184"}));   //map function creates new array and this current property will be inserted into the new array
+//     await Listing.insertMany(initData.data);
+//     console.log("data was initialized");
+// }
+// initDB();
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));  //data which are coming in req , they can be parsed for this line
