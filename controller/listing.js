@@ -41,7 +41,7 @@ module.exports.createListing = async (req, res, next) => {
 
 module.exports.renderEditForm = async(req,res) => {
     let {id} = req.params;
-    const listing =  await Listing.findById(id);
+    const listing =  await Listing.findById(id);9.
     if(!listing){
         req.flash("error", "Listing you requested for does not exist!");
         res.redirect("/listings");

@@ -10,21 +10,21 @@
     <div class="card  col-6 offset-3 show-card  listing-card">
         <img src="<%= listing.image.url %>" class="card-img-top  show-img" alt="listing_image"/>
         <div class="card-body">
-            <p class="card-text"><i><b><%= listing.owner.username %></b></i>
-        
-                <p class="card-text"><%= listing.description %></p><br>
-                <%= listing.price %>/per night<br>
-                <%= listing.location %><br>
-                <%= listing.country%>
+            <p class="card-text">
+                <i><b><%=listing.owner.username %></b></i>
+                <p class="card-text"><%=listing.description %></p><br>
+                <%=listing.price %>/per night<br>
+                <%=listing.location %><br>
+                <%=listing.country%> 
             </p>
         </div>
     </div>
     <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
     <div class="btns">
-        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit listing</a>
+        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark  offset-3 edit-btn">Edit listing</a>
         <br></br>
         <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-            <button class="btn btn-dark offset-5">Delete this listing</button>
+            <button class="btn btn-dark offset-1">Delete listing</button>
         </form>
     </div>
     <% } %>

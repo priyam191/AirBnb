@@ -116,3 +116,8 @@ body {
     height: 400px;
     width: 400px;
 }
+
+.filter {
+    display: flex;
+    justify-content: space-evenly;
+}
