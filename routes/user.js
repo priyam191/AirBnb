@@ -1,3 +1,5 @@
+// this js file is for authentication (signup, login etc.)
+
 const express = require("express");
 const router = express.Router();
 const User = require("../models/user.js");

@@ -80,8 +80,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser());               // after login user's all the work will be stored here 
+passport.deserializeUser(User.deserializeUser());           // after logout work 
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
