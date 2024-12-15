@@ -43,13 +43,7 @@ async function main(){
 
 const initData = require("./init/data.js");
 
-// const initDB = async () => {
-//     await Listing.deleteMany({});       // if there exist any data in database then it clears all the data
-//     initData.data = initData.data.map((obj) =>({...obj, owner: "66f3d0dc47fc4cec6b7b0184"}));   //map function creates new array and this current property will be inserted into the new array
-//     await Listing.insertMany(initData.data);
-//     console.log("data was initialized");
-// }
-// initDB();
+
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -101,24 +95,7 @@ app.use("/", userRouter);
 
 
 
-//reviews
-//post reviews
 
-
-
-// app.get("/testListing", async(req,res) =>{
-//     let sampleListing = new listing({
-//         title: "My New Villa",
-//         description: "by the beach",
-//         price: 1200,
-//         location: "calangute, Goa",
-//         country: "india",
-//     });
-
-//     await sampleListing.save();
-//     console.log("sample was saved");
-//     res.send("succesful testing");
-// });
 
 app.all("*", (req, res, next) =>{
     next(new expressError(404, "page not found"));
