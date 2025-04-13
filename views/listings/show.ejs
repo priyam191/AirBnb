@@ -58,14 +58,14 @@
                 <% for (const review of listing.reviews) { %>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><%= review.user?.username || 'Anonymous' %></h5>
+                        <h5 class="card-title "><%=review.author.username%></h5>
                         <p class="card-text"><%= review.comment %></p>
                         <p class="starability-result" data-rating="<%= review.rating %>">Rated: <%= review.rating %> stars</p>
                     </div>
-                    <% if (currUser && review.user && String(currUser._id) === String(review.user._id)) { %>
-                    <form class="mb-3" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                        <button class="btn btn-sm btn-dark">Delete</button>
-                    </form>
+                    <% if(currUser && currUser._id.equals(review.author._id)) { %>
+                        <form class="mb-3" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                            <button class="btn btn-sm btn-dark">Delete</button>
+                        </form>
                     <% } %>
                 </div>
                 <% } %>
